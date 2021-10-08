@@ -16,7 +16,7 @@ public class Board {
     }
 
     /**
-     * Initiliazes the board with pieces according to string array.
+     * Initializes the board with pieces according to string array.
      */
     public void initBoard(String[] pieceStrings) {
         board = new Piece[8][8];
