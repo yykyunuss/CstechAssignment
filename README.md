@@ -1,4 +1,5 @@
 CHESS BOARD POINT CALCULATIONS
+
     - Main idea of the algorithm for calculation:
         1) Iterate every piece of the board
         2) According to piece type, run the calculation method
