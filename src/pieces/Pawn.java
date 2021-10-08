@@ -6,72 +6,53 @@ import utils.NeighbourSquares;
 
 public class Pawn extends Piece {
     NeighbourSquares neighbourSquares;
-    public Pawn(Color pieceColor, Location location) {
-        super(pieceColor, location, 1, false);
+
+    public Pawn(Color color, Location location) {
+        super(color, location, 1, false);
         neighbourSquares = new NeighbourSquares();
     }
 
-    @Override
-    public void calculateThreats(Piece p, Piece[][] board) {
-        if(p.getColor()==Color.WHITE){
-            Location northWest = neighbourSquares.northWest(p);
-            Location northEast = neighbourSquares.northEast(p);
+    /**
+     * This method calculates the point of opposing color pieces threatened by the pawn which
+     * passed as a parameter.
+     * Method checks cross-forward two squares which pawn can move in the board.
+     * Cross-forward squares directions differ for white and black pawns.
+     * So, we have two if block for white and black situation.
+     */
+    public void calculateThreats(Piece piece, Piece[][] board) {
+        if (piece.getColor() == Color.WHITE) {
+            Location northWest = neighbourSquares.northWest(piece);
+            Location northEast = neighbourSquares.northEast(piece);
 
-            if(northWest.isLegalIndex() && board[northWest.getX()][northWest.getY()] != null
-                    && board[northWest.getX()][northWest.getY()].getColor() == Color.BLACK ){
-                System.out.println("north westt");
+            if (northWest.isLegalIndex() && board[northWest.getX()][northWest.getY()] != null
+                    && board[northWest.getX()][northWest.getY()].getColor() == Color.BLACK) {
+                // Sets the pieces point to half
                 board[northWest.getX()][northWest.getY()].setPoint();
-                board[northWest.getX()][northWest.getY()].isThreatened=true;
+                // Sets the pieces threatened situation is true.
+                // So, we do not calculate point again for this piece
+                board[northWest.getX()][northWest.getY()].isThreatened = true;
             }
-            if(northEast.isLegalIndex() && board[northEast.getX()][northEast.getY()] != null
-                    && board[northEast.getX()][northEast.getY()].getColor() == Color.BLACK){
-                System.out.println("!!!!!!!!!!!!");
+            if (northEast.isLegalIndex() && board[northEast.getX()][northEast.getY()] != null
+                    && board[northEast.getX()][northEast.getY()].getColor() == Color.BLACK) {
                 board[northEast.getX()][northEast.getY()].setPoint();
-                board[northEast.getX()][northEast.getY()].isThreatened=true;
+                board[northEast.getX()][northEast.getY()].isThreatened = true;
             }
         }
 
-        if(p.getColor()==Color.BLACK){
-            Location southWest = neighbourSquares.southWest(p);
-            Location southEast = neighbourSquares.southEast(p);
+        if (piece.getColor() == Color.BLACK) {
+            Location southWest = neighbourSquares.southWest(piece);
+            Location southEast = neighbourSquares.southEast(piece);
 
-            System.out.println("psss: " + southWest.getX() + ",,  " + southWest.getY());
-            if(southWest.isLegalIndex() && board[southWest.getX()][southWest.getY()] != null
-                    && board[southWest.getX()][southWest.getY()].getColor() == Color.WHITE ){
-                System.out.println("south westt");
+            if (southWest.isLegalIndex() && board[southWest.getX()][southWest.getY()] != null
+                    && board[southWest.getX()][southWest.getY()].getColor() == Color.WHITE) {
                 board[southWest.getX()][southWest.getY()].setPoint();
-                board[southWest.getX()][southWest.getY()].isThreatened=true;
+                board[southWest.getX()][southWest.getY()].isThreatened = true;
             }
-            if(southEast.isLegalIndex() && board[southEast.getX()][southEast.getY()] != null
-                    && board[southEast.getX()][southEast.getY()].getColor() == Color.WHITE){
-                System.out.println("south eastt");
+            if (southEast.isLegalIndex() && board[southEast.getX()][southEast.getY()] != null
+                    && board[southEast.getX()][southEast.getY()].getColor() == Color.WHITE) {
                 board[southEast.getX()][southEast.getY()].setPoint();
-                board[southEast.getX()][southEast.getY()].isThreatened=true;
+                board[southEast.getX()][southEast.getY()].isThreatened = true;
             }
         }
-
-        /*for(int i=0; i<8; i++){
-            for(int j=0; j<8; j++){
-                if(board[i][j] != null && p.getColor()==Color.WHITE && board[i][j].getColor()==Color.BLACK){
-                    if(neighbourSquares.northWest(p).equals(board[i][j].getLocation())
-                            || neighbourSquares.northEast(p).equals(board[i][j].getLocation())){
-                        if(!board[i][j].isThreatened) {
-                            threatPoint += board[i][j].getPoint() / 2;
-                            board[i][j].isThreatened=true;
-                        }
-                    }
-                }
-                else if(board[i][j] != null && p.getColor()==Color.BLACK && board[i][j].getColor()==Color.WHITE){
-                    if(neighbourSquares.southWest(p).equals(board[i][j].getLocation())
-                            || neighbourSquares.southEast(p).equals(board[i][j].getLocation())){
-                        if(!board[i][j].isThreatened) {
-                            threatPoint += board[i][j].getPoint() / 2;
-                            board[i][j].isThreatened=true;
-                        }
-                    }
-                }
-            }
-        }*/
-
     }
 }

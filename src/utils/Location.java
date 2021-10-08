@@ -3,9 +3,8 @@ package utils;
 public class Location {
     int x;
     int y;
-    public boolean isLegal=true;
 
-    public Location(int x, int y){
+    public Location(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -18,10 +17,11 @@ public class Location {
         return y;
     }
 
-    public boolean isLegalIndex(){
-        if(this.x<0 || this.x>7 || this.y<0 || this.y>7)
-            return false;
-        return true;
+    /**
+     * Checks if location's x or y is out of the board. If it is, returns false.
+     */
+    public boolean isLegalIndex() {
+        return this.x >= 0 && this.x <= 7 && this.y >= 0 && this.y <= 7;
     }
 
     @Override
@@ -30,13 +30,5 @@ public class Location {
         if (o == null || getClass() != o.getClass()) return false;
         Location location = (Location) o;
         return x == location.x && y == location.y;
-    }
-
-    @Override
-    public String toString() {
-        return "utils.Location{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
     }
 }

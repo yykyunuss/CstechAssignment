@@ -3,82 +3,84 @@ package pieces;
 import utils.Color;
 import utils.Location;
 
-import java.util.List;
-
 public class Bishop extends Piece {
 
-    public Bishop(Color pieceColor, Location location) {
-        super(pieceColor, location,3, false);
+    public Bishop(Color color, Location location) {
+        super(color, location, 3, false);
     }
 
-    @Override
-    public void calculateThreats(Piece p, Piece[][] board) {
+    /**
+     * This method calculates the point of opposing color pieces threatened by the bishop which
+     * passed as a parameter.
+     * Method includes 4 for loops. Every loop checks one diagonal direction which the bishop can move.
+     */
+    public void calculateThreats(Piece piece, Piece[][] board) {
 
-        int j=p.getLocation().getY()-1;
-        for(int i=p.getLocation().getX()-1; i>=0; i--){
-            if(j<0)
+        // North-west direction
+        int j = piece.getLocation().getY() - 1;
+        for (int i = piece.getLocation().getX() - 1; i >= 0; i--) {
+            if (j < 0)
                 break;
             Piece p2 = board[i][j];
-            if(p2!=null){
-
-                if(p.getColor()!=p2.getColor()){
-                    System.out.println("FIL NW ");
+            if (p2 != null) {
+                if (piece.getColor() != p2.getColor()) {
+                    // Sets the pieces point to half
                     p2.setPoint();
-                    p2.isThreatened=true;
+                    // Sets the pieces threatened situation is true.
+                    // So, we do not calculate point again for this piece
+                    p2.isThreatened = true;
                 }
                 break;
             }
             j--;
         }
 
-        j=p.getLocation().getY()-1;
-        for(int i=p.getLocation().getX()+1; i<8; i++){
-            if(j<0)
+        // North-east direction
+        j = piece.getLocation().getY() - 1;
+        for (int i = piece.getLocation().getX() + 1; i < 8; i++) {
+            if (j < 0)
                 break;
             Piece p2 = board[i][j];
-            if(p2!=null){
-                if(p.getColor()!=p2.getColor()){
-                    System.out.println("FIL NE");
+            if (p2 != null) {
+                if (piece.getColor() != p2.getColor()) {
                     p2.setPoint();
-                    p2.isThreatened=true;
+                    p2.isThreatened = true;
                 }
                 break;
             }
             j--;
         }
 
-
-        j=p.getLocation().getY()+1;
-        for(int i=p.getLocation().getX()-1; i>=0; i--){
-            if(j>7)
+        // South-west direction
+        j = piece.getLocation().getY() + 1;
+        for (int i = piece.getLocation().getX() - 1; i >= 0; i--) {
+            if (j > 7)
                 break;
             Piece p2 = board[i][j];
-            if(p2!=null){
-                if(p.getColor()!=p2.getColor()){
-
+            if (p2 != null) {
+                if (piece.getColor() != p2.getColor()) {
                     p2.setPoint();
-                    p2.isThreatened=true;
+                    p2.isThreatened = true;
                 }
                 break;
             }
             j++;
         }
 
-        j=p.getLocation().getY()+1;
-        for(int i=p.getLocation().getX()+1; i<8; i++){
-            if(j>7)
+        // South-east direction
+        j = piece.getLocation().getY() + 1;
+        for (int i = piece.getLocation().getX() + 1; i < 8; i++) {
+            if (j > 7)
                 break;
             Piece p2 = board[i][j];
-            if(p2!=null){
-                if(p.getColor()!=p2.getColor()){
-                    System.out.println("girdii 2");
+            if (p2 != null) {
+                if (piece.getColor() != p2.getColor()) {
                     p2.setPoint();
-                    p2.isThreatened=true;
+                    p2.isThreatened = true;
                 }
                 break;
             }
             j++;
         }
-
     }
 }
