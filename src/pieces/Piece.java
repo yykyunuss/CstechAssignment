@@ -10,11 +10,13 @@ public abstract class Piece {
     Color color;
     Location location;
     double point;
+    boolean isThreatened;
 
-    public Piece(Color pieceColor, Location location, double point) {
-        color = pieceColor;
+    public Piece(Color color, Location location, double point, boolean isThreatened) {
+        this.color = color;
         this.location = location;
         this.point = point;
+        this.isThreatened = isThreatened;
     }
 
     /**
@@ -39,5 +41,10 @@ public abstract class Piece {
         return point;
     }
 
-    public abstract double calculateThreats(Piece piece, Piece[][] board);
+    public void setPoint() {
+        if(!this.isThreatened)
+            this.point = this.point/2;
+    }
+
+    public abstract void calculateThreats(Piece p, Piece[][] board);
 }

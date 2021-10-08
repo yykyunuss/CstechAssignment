@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Test {
     public static void main(String[] args) {
         String [] strArray = new String[64];
-        File file = new File("board3.txt");
+        File file = new File("board1.txt");
         try{
             Scanner scanner = new Scanner(file);
             int index=0;

@@ -8,18 +8,17 @@ import java.util.List;
 public class Rook extends Piece {
 
     public Rook(Color pieceColor, Location location) {
-        super(pieceColor, location,5);
+        super(pieceColor, location,5, false);
     }
 
     @Override
-    public double calculateThreats(Piece p, Piece[][] board) {
-        double threatPoint=0;
-
+    public void calculateThreats(Piece p, Piece[][] board) {
         for(int i=p.getLocation().getY()-1; i>=0; i--){
             Piece p2 = board[p.getLocation().getX()][i];
             if(p2!=null){
                 if(p.getColor()!=p2.getColor()){
-                    threatPoint+=p2.getPoint()/2;
+                    board[p.getLocation().getX()][i].setPoint();
+                    board[p.getLocation().getX()][i].isThreatened=true;
                 }
                 break;
             }
@@ -28,7 +27,8 @@ public class Rook extends Piece {
             Piece p2 = board[p.getLocation().getX()][i];
             if(p2!=null){
                 if(p.getColor()!=p2.getColor()){
-                    threatPoint+=p2.getPoint()/2;
+                    board[p.getLocation().getX()][i].setPoint();
+                    board[p.getLocation().getX()][i].isThreatened=true;
                 }
                 break;
             }
@@ -37,7 +37,8 @@ public class Rook extends Piece {
             Piece p2 = board[i][p.getLocation().getY()];
             if(p2!=null){
                 if(p.getColor()!=p2.getColor()){
-                    threatPoint+=p2.getPoint()/2;
+                    board[i][p.getLocation().getY()].setPoint();
+                    board[i][p.getLocation().getY()].isThreatened=true;
                 }
                 break;
             }
@@ -46,13 +47,11 @@ public class Rook extends Piece {
             Piece p2 = board[i][p.getLocation().getY()];
             if(p2!=null){
                 if(p.getColor()!=p2.getColor()){
-                    threatPoint+=p2.getPoint()/2;
+                    board[i][p.getLocation().getY()].setPoint();
+                    board[i][p.getLocation().getY()].isThreatened=true;
                 }
                 break;
             }
         }
-
-
-        return threatPoint;
     }
 }

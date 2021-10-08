@@ -3,6 +3,7 @@ package utils;
 public class Location {
     int x;
     int y;
+    public boolean isLegal=true;
 
     public Location(int x, int y){
         this.x = x;
@@ -15,6 +16,12 @@ public class Location {
 
     public int getY() {
         return y;
+    }
+
+    public boolean isLegalIndex(){
+        if(this.x<0 || this.x>7 || this.y<0 || this.y>7)
+            return false;
+        return true;
     }
 
     @Override
